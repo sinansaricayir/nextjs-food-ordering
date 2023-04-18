@@ -7,7 +7,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 const Search = ({ setIsSearchModal }) => {
   return (
     <div className="fixed top-0 w-screen h-screen drop-shadow-2xl my-10">
-      <div className="relative top-[10%] left-[20%] w-1/2 h-auto bg-white border border-[#222831] rounded-2xl">
+      <div className="relative top-[10%] left-[15%] w-[70%] h-auto bg-white border border-[#222831] rounded-3xl px-10">
         <OutsideClickHandler onOutsideClick={() => setIsSearchModal(false)}>
           <Title className="text-[40px] text-black text-center mt-12 mb-6">
             Search
@@ -20,7 +20,7 @@ const Search = ({ setIsSearchModal }) => {
             />
             <div>
               <ul className="mt-4">
-                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg">
+                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
                   <div>
                     <Image
                       src="/images/f1.png"
@@ -32,7 +32,7 @@ const Search = ({ setIsSearchModal }) => {
                   <span className="font-bold">Good Pizza</span>
                   <span className="font-bold">$10</span>
                 </li>
-                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg">
+                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
                   <div>
                     <Image
                       src="/images/f1.png"
@@ -44,7 +44,7 @@ const Search = ({ setIsSearchModal }) => {
                   <span className="font-bold">Good Pizza</span>
                   <span className="font-bold">$10</span>
                 </li>
-                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg">
+                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
                   <div>
                     <Image
                       src="/images/f1.png"
@@ -60,7 +60,10 @@ const Search = ({ setIsSearchModal }) => {
             </div>
           </div>
           <button onClick={() => setIsSearchModal(false)}>
-            <AiFillCloseCircle className="text-3xl absolute top-1 right-1 hover:text-red-600 transition-all" />
+            <AiFillCloseCircle
+              size={40}
+              className="absolute top-2 right-2 hover:text-primary transition-all"
+            />
           </button>
         </OutsideClickHandler>
       </div>
