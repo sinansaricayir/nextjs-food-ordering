@@ -1,73 +1,57 @@
-import React from "react";
-import OutsideClickHandler from "react-outside-click-handler";
 import Title from "../ui/Title";
 import Image from "next/image";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { Modal, Input } from "antd";
 
-const Search = ({ setIsSearchModal }) => {
+const Search = ({ isSearchModal, setIsSearchModal }) => {
+  const showModal = () => {
+    setIsSearchModal(true);
+  };
+  const handleOk = () => {
+    setIsSearchModal(false);
+  };
+  const handleCancel = () => {
+    setIsSearchModal(false);
+  };
   return (
-    <div className="fixed top-0 w-screen h-screen drop-shadow-2xl my-10">
-      <div className="relative top-[10%] left-[15%] w-[70%] h-auto bg-white border border-[#222831] rounded-3xl px-10">
-        <OutsideClickHandler onOutsideClick={() => setIsSearchModal(false)}>
-          <Title className="text-[40px] text-black text-center mt-12 mb-6">
-            Search
-          </Title>
-          <div className="mx-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full rounded-lg h-12 pl-2 mb-4 border-2 border-primary"
-            />
-            <div>
-              <ul className="mt-4">
-                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
-                  <div>
-                    <Image
-                      src="/images/f1.png"
-                      width={100}
-                      height={100}
-                      alt=""
-                    />
-                  </div>
-                  <span className="font-bold">Good Pizza</span>
-                  <span className="font-bold">$10</span>
-                </li>
-                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
-                  <div>
-                    <Image
-                      src="/images/f1.png"
-                      width={100}
-                      height={100}
-                      alt=""
-                    />
-                  </div>
-                  <span className="font-bold">Good Pizza</span>
-                  <span className="font-bold">$10</span>
-                </li>
-                <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
-                  <div>
-                    <Image
-                      src="/images/f1.png"
-                      width={100}
-                      height={100}
-                      alt=""
-                    />
-                  </div>
-                  <span className="font-bold">Good Pizza</span>
-                  <span className="font-bold">$10</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <button onClick={() => setIsSearchModal(false)}>
-            <AiFillCloseCircle
-              size={40}
-              className="absolute top-2 right-2 hover:text-primary transition-all"
-            />
-          </button>
-        </OutsideClickHandler>
-      </div>
-    </div>
+    <>
+      <Modal
+        title={false}
+        open={isSearchModal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+      >
+        <Title className="text-4xl text-black text-center mt-12 mb-6">
+          Search
+        </Title>
+        <Input size="large" placeholder="Search..." />
+        <div>
+          <ul className="mt-4">
+            <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
+              <div>
+                <Image src="/images/f1.png" width={100} height={100} alt="" />
+              </div>
+              <span className="font-bold">Good Pizza</span>
+              <span className="font-bold">$10</span>
+            </li>
+            <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
+              <div>
+                <Image src="/images/f1.png" width={100} height={100} alt="" />
+              </div>
+              <span className="font-bold">Good Pizza</span>
+              <span className="font-bold">$10</span>
+            </li>
+            <li className="flex items-center justify-between p-2 hover:bg-primary mb-4 rounded-lg shadow-md">
+              <div>
+                <Image src="/images/f1.png" width={100} height={100} alt="" />
+              </div>
+              <span className="font-bold">Good Pizza</span>
+              <span className="font-bold">$10</span>
+            </li>
+          </ul>
+        </div>
+      </Modal>
+    </>
   );
 };
 

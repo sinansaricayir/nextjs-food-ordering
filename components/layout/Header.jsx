@@ -67,7 +67,12 @@ const Header = () => {
           </button>
         </div>
       </div>
-      {isSearchModal && <Search setIsSearchModal={setIsSearchModal} />}
+      {isSearchModal && (
+        <Search
+          isSearchModal={isSearchModal}
+          setIsSearchModal={setIsSearchModal}
+        />
+      )}
     </div>
   );
 };
