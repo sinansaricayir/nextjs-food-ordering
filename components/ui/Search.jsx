@@ -3,9 +3,6 @@ import Image from "next/image";
 import { Modal, Input } from "antd";
 
 const Search = ({ isSearchModal, setIsSearchModal }) => {
-  const showModal = () => {
-    setIsSearchModal(true);
-  };
   const handleOk = () => {
     setIsSearchModal(false);
   };

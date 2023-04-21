@@ -11,15 +11,14 @@ const MenuItem = ({ image, title, text, price }) => {
           width={150}
           height={150}
           alt=""
-          objectFit="cover"
         />
       </div>
       <div className="h-40">
-        <h4 className="mx-2 mb-2 mt-6 text-xl">{title}</h4>
+        <h4 className="mx-2 mb-2 mt-6 text-xl font-bold">{title}</h4>
         <p className="text-sm mx-2 font-thin">{text}</p>
         <div className="flex items-center justify-between mx-6">
-          <span>${price}</span>
-          <button className="bg-primary p-3 rounded-full">
+          <span className="font-bold">${price}</span>
+          <button className="bg-primary p-3 rounded-full cursor:pointer hover:opacity-70 transition-all">
             <AiOutlineShoppingCart />
           </button>
         </div>
