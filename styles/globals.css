@@ -13,6 +13,12 @@ body {
   box-sizing: border-box;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .btn-primary{
   @apply text-white rounded-3xl bg-primary px-[35px] py-[8px] cursor-pointer hover:opacity-70 transition-all
 }
