@@ -1,8 +1,6 @@
 import Head from "next/head";
 import Header from "../components/layout/Header";
 import Home from "./home/index";
-import Input from "@/components/input/Input";
-import Reservation from "@/components/Reservation";
 
 export default function Index() {
   return (
@@ -12,7 +10,6 @@ export default function Index() {
       </Head>
       <Header />
       <Home />
-      <Reservation />
     </div>
   );
 }

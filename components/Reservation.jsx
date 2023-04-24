@@ -1,26 +1,74 @@
-import React from "react";
 import Title from "./ui/Title";
 import Input from "./input/Input";
+import { useFormik } from "formik";
 
 const Reservation = () => {
+  const onSubmit = async (values, actions) => {
+    await new Promise((resolve) => setTimeout(resolve, 4000));
+    actions.resetForm();
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      fullName: "",
+      phoneNumber: "",
+      email: "",
+      persons: "",
+      date: "",
+    },
+    onSubmit,
+  });
+
+  console.log(formik.values);
+
   return (
     <div className="container mx-auto py-20">
       <Title className="sm:text-5xl text-4xl sm:text-start text-center">
         Book A Table
       </Title>
       <div className="flex lg:items-start items-center justify-between lg:flex-row flex-col-reverse gap-10 mt-12">
-        <form className="flex flex-col gap-4 w-full ">
-          <Input name="fullName" type="text" placeholder="Your Full Name" />
+        <form
+          className="flex flex-col gap-4 w-full "
+          onSubmit={formik.handleSubmit}
+        >
+          <Input
+            name="fullName"
+            type="text"
+            placeholder="Your Full Name"
+            onChange={formik.handleChange}
+            value={formik.values.fullName}
+          />
           <Input
             name="phoneNumber"
             type="number"
             placeholder="Your Phone Number"
+            onChange={formik.handleChange}
+            value={formik.values.phoneNumber}
           />
-          <Input name="email" type="email" placeholder="Your Email" />
-          <Input name="persons" type="number" placeholder="How Many Persons?" />
-          <Input name="date" type="datetime-local" />
+          <Input
+            name="email"
+            type="email"
+            placeholder="Your Email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+          <Input
+            name="persons"
+            type="number"
+            placeholder="How Many Persons?"
+            onChange={formik.handleChange}
+            value={formik.values.persons}
+          />
+          <Input
+            name="date"
+            type="datetime-local"
+            onChange={formik.handleChange}
+            value={formik.values.date}
+          />
           <div className="flex sm:justify-start justify-center">
-            <button className="btn-primary w-[40%]">Book Now</button>
+            <button className="btn-primary w-[40%]" type="submit">
+              Book Now
+            </button>
           </div>
         </form>
         <div className="">
