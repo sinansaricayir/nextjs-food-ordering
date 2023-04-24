@@ -1,19 +1,16 @@
-const Input = ({ type, placeholder, name, onChange, value }) => {
+const Input = (props) => {
+  const { placeholder, ...input } = props;
+
   return (
     <div className="w-full">
       <label className="relative block cursor-text w-full">
         <input
-          type={type}
-          name={name}
-          className="w-full h-14 outline-none border border-primary px-3 peer"
+          type="email"
+          className="h-14 w-full border border-primary outline-none px-4 peer pt-2"
           required
-          onChange={onChange}
-          value={value}
+          {...input}
         />
-        <span
-          className="absolute flex items-start top-4 left-4 text-sm transition-all peer-focus:text-xs 
-            peer-focus:top-1 peer-valid:top-1 peer-valid:text-xs"
-        >
+        <span className="absolute top-0 left-0 px-4 text-sm flex items-center h-full peer-focus:h-7 peer-focus:text-xs peer-valid:h-7 peer-valid:text-xs transition-all">
           {placeholder}
         </span>
       </label>
