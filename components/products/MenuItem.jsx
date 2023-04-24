@@ -6,7 +6,7 @@ const MenuItem = ({ image, title, text, price }) => {
     <div className=" bg-secondary text-white shadow-2xl shadow-black rounded-2xl">
       <div className="bg-[#f1f2f3] w-full h-[210px] grid place-content-center rounded-bl-[30px] rounded-t-xl">
         <Image
-          className="hover:scale-110 transition-all"
+          className="hover:scale-110 transition-all duration-500"
           src={image}
           width={150}
           height={150}

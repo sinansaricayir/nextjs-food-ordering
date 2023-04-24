@@ -26,7 +26,7 @@ const Carousel = () => {
     <div className="h-screen w-full container mx-auto -mt-[88px]">
       <div className="absolute left-0 w-full h-[103%]">
         <div className="relative h-full w-full">
-          <Image src="/images/hero-bg.jpg" alt="" fill />
+          <Image src="/images/hero-bg.jpg" alt="" fill objectFit="cover" />
         </div>
       </div>
       <Slider {...settings}>

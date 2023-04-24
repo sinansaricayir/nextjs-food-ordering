@@ -38,6 +38,27 @@ const MenuWrapper = () => {
           magnam voluptatem repellendus sed eaque"
           price={25}
         />
+        <MenuItem
+          image="/images/f1.png"
+          title="Delicious Pizza"
+          text="Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit,
+          magnam voluptatem repellendus sed eaque"
+          price={22}
+        />
+        <MenuItem
+          image="/images/f2.png"
+          title="Delicious Burger"
+          text="Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit,
+          magnam voluptatem repellendus sed eaque"
+          price={20}
+        />
+        <MenuItem
+          image="/images/f3.png"
+          title="Delicious Pizzarotti"
+          text="Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit,
+          magnam voluptatem repellendus sed eaque"
+          price={25}
+        />
       </div>
     </div>
   );

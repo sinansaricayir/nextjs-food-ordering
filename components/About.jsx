@@ -6,7 +6,7 @@ const About = () => {
     <div className="bg-secondary">
       <div className="container mx-auto md:py-32 py-20 flex md:flex-row flex-col-reverse md:gap-10 items-center ">
         <div className="md:h-full md:w-full">
-          <div className="hover:scale-110 transition-all md:w-full w-[300px] ">
+          <div className="hover:scale-110 transition-all md:w-full w-[300px] ease-in duration-500 ">
             <Image
               src="/images/about-img.png"
               width={445}
@@ -15,7 +15,7 @@ const About = () => {
             />
           </div>
         </div>
-        <div className="text-white w-full flex flex-col items-start justify-center sm:px-0 px-2">
+        <div className="text-white w-full flex flex-col items-start justify-center sm:px-0 px-2 ">
           <Title className="mb-8 text-6xl">We Are Feane</Title>
           <p className="font-thin">
             There are many variations of passages of Lorem Ipsum available, but

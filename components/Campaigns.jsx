@@ -4,8 +4,8 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const CampaignItem = ({ img, title, discount }) => {
   return (
-    <div className="flex lg:flex-row flex-col justify-around items-center bg-secondary w-full sm:py-4 py-8 sm:px-4 px-6 sm:rounded-3xl rounded-full shadow-xl">
-      <div className="hover:scale-110 transition-all lg:mb-0 mb-4">
+    <div className="flex lg:flex-row flex-col justify-around items-center bg-secondary w-full sm:py-4 py-8 sm:px-4 px-6 sm:rounded-3xl rounded-full shadow-xl ease-in duration-500">
+      <div className="hover:scale-110 transition-all duration-500 lg:mb-0 mb-4">
         <Image
           src={img}
           alt={title}

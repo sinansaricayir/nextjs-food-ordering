@@ -8,13 +8,17 @@ const Reservation = () => {
       <Title className="sm:text-5xl text-4xl sm:text-start text-center">
         Book A Table
       </Title>
-      <div className="flex lg:items-start items-center justify-between lg:flex-row flex-col gap-10 mt-12">
+      <div className="flex lg:items-start items-center justify-between lg:flex-row flex-col-reverse gap-10 mt-12">
         <form className="flex flex-col gap-4 w-full ">
-          <Input type="text" placeholder="Your Full Name" />
-          <Input type="number" placeholder="Your Phone Number" />
-          <Input type="email" placeholder="Your Email" />
-          <Input type="number" placeholder="How Many Persons?" />
-          <Input type="date" />
+          <Input name="fullName" type="text" placeholder="Your Full Name" />
+          <Input
+            name="phoneNumber"
+            type="number"
+            placeholder="Your Phone Number"
+          />
+          <Input name="email" type="email" placeholder="Your Email" />
+          <Input name="persons" type="number" placeholder="How Many Persons?" />
+          <Input name="date" type="datetime-local" />
           <div className="flex sm:justify-start justify-center">
             <button className="btn-primary w-[40%]">Book Now</button>
           </div>
