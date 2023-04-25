@@ -1,12 +1,14 @@
 const Input = (props) => {
-  const { placeholder, ...input } = props;
+  const { placeholder, errorMessage, touched, ...input } = props;
 
   return (
     <div className="w-full">
       <label className="relative block cursor-text w-full">
         <input
           type="email"
-          className="h-14 w-full border border-primary outline-none px-4 peer pt-2"
+          className={`h-14 w-full border ${
+            touched && errorMessage ? "border-red-500" : "border-primary"
+          } outline-none px-4 peer pt-2`}
           required
           {...input}
         />
@@ -14,6 +16,7 @@ const Input = (props) => {
           {placeholder}
         </span>
       </label>
+      {touched && <span className="text-xs text-danger">{errorMessage}</span>}
     </div>
   );
 };
