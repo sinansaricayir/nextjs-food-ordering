@@ -1,11 +1,9 @@
-import Header from "@/components/layout/Header";
 import Title from "@/components/ui/Title";
 import Image from "next/image";
 
 const Index = () => {
   return (
     <>
-      <Header />
       <div className="h-screen flex items-center justify-center gap-20 flex-wrap">
         <div className="relative h-[45%] max-w-[600px] min-w-[400px] lg:mt-0 mt-4">
           {/* <img src="/images/f1.png" alt="" className="h-full w-full" /> */}

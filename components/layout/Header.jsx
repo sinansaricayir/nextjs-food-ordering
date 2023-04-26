@@ -5,6 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Search from "../ui/Search";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);
@@ -28,16 +29,16 @@ const Header = () => {
         >
           <ul className="flex sm:flex-row flex-col gap-6 uppercase text-center">
             <li className="hover:text-primary cursor-pointer">
-              <a href="#">home</a>
+              <Link href="/">home</Link>
             </li>
             <li className="hover:text-primary cursor-pointer">
-              <a href="#">menu</a>
+              <Link href="/menu">menu</Link>
             </li>
             <li className="hover:text-primary cursor-pointer">
-              <a href="#">about</a>
+              <Link href="/about">about</Link>
             </li>
             <li className="hover:text-primary cursor-pointer">
-              <a href="#">book table</a>
+              <Link href="/reservation">book table</Link>
             </li>
           </ul>
           <AiFillCloseCircle

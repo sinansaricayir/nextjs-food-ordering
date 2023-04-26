@@ -47,22 +47,22 @@ const Footer = () => {
             </p>
             <div>
               <ul className="flex items-center gap-2">
-                <li className="p-2 rounded-full bg-white text-black hover:text-primary duration-300">
+                <li className="p-2 rounded-full bg-white text-black hover:text-primary hover:scale-110 ease-in duration-300">
                   <a href="">
                     <FaFacebookF />
                   </a>
                 </li>
-                <li className="p-2 rounded-full bg-white text-black hover:text-primary duration-300">
+                <li className="p-2 rounded-full bg-white text-black hover:text-primary hover:scale-110 ease-in duration-300">
                   <a href="">
                     <FaTwitter />
                   </a>
                 </li>
-                <li className="p-2 rounded-full bg-white text-black hover:text-primary duration-300">
+                <li className="p-2 rounded-full bg-white text-black hover:text-primary hover:scale-110 ease-in duration-300">
                   <a href="">
                     <FaLinkedinIn />
                   </a>
                 </li>
-                <li className="p-2 rounded-full bg-white text-black hover:text-primary duration-300">
+                <li className="p-2 rounded-full bg-white text-black hover:text-primary hover:scale-110 ease-in duration-300">
                   <a href="">
                     <FaInstagram />
                   </a>
