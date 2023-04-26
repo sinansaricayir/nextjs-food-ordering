@@ -48,14 +48,14 @@ const Header = () => {
           />
         </nav>
         <div className="flex gap-x-4 items-center">
+          <Link href="/auth/login">
+            <FaUserAlt className="hover:text-primary transition-all duration-300 cursor-pointer" />
+          </Link>
           <a href="#">
-            <FaUserAlt className="hover:text-primary transition-all" />
-          </a>
-          <a href="#">
-            <FaShoppingCart className="hover:text-primary transition-all" />
+            <FaShoppingCart className="hover:text-primary transition-all duration-300 cursor-pointer" />
           </a>
           <button onClick={() => setIsSearchModal(true)}>
-            <FaSearch className="hover:text-primary transition-all" />
+            <FaSearch className="hover:text-primary transition-all duration-300 cursor-pointer" />
           </button>
           <a href="#" className="md:inline-block hidden">
             <button className="btn-primary">Order Online</button>

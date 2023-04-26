@@ -1,5 +1,5 @@
 import { reservationSchema } from "@/schema/reservation";
-import Input from "./input/Input";
+import Input from "./form/Input";
 import Title from "./ui/Title";
 import { useFormik } from "formik";
 
