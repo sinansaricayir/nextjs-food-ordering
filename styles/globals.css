@@ -20,7 +20,7 @@ input::-webkit-inner-spin-button {
 }
 
 .btn-primary{
-  @apply text-white rounded-3xl bg-primary px-[35px] py-[8px] cursor-pointer hover:opacity-70 transition-all
+  @apply text-white rounded-3xl bg-primary px-[35px] py-[8px] cursor-pointer hover:opacity-70 transition-all duration-300
 }
 
 .slick-dots {
