@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <div
-      className={`h-[5.5rem z-40 relative ${
+      className={`h-[5.5rem] z-40 relative ${
         router.asPath === "/" ? "bg-transparent" : "bg-secondary"
       }`}
     >
@@ -57,7 +57,7 @@ const Header = () => {
           <button onClick={() => setIsSearchModal(true)}>
             <FaSearch className="hover:text-primary transition-all duration-300 cursor-pointer" />
           </button>
-          <a href="#" className="md:inline-block hidden">
+          <a href="#" className="md:inline-block hidden animate-pulse">
             <button className="btn-primary">Order Online</button>
           </a>
           <button

@@ -1,10 +1,13 @@
 import Title from "@/components/ui/Title";
+import Head from "next/head";
 import Image from "next/image";
-import React from "react";
 
 const Index = () => {
   return (
     <div className="min-h-[calc(100vh_-_433px)]">
+      <Head>
+        <title>Food Ordering | Cart</title>
+      </Head>
       <div className="flex justify-between items-center md:flex-row flex-col">
         <div className="w-full min-h-[calc(100vh_-_433px)] flex items-center flex-1 md:p-10 p-4 overflow-auto">
           <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
