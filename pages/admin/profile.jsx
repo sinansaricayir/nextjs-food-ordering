@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
-import { AiOutlineHome, AiOutlineLogout } from "react-icons/ai";
-import { BsKey, BsBasket } from "react-icons/bs";
-
+import { AiOutlineLogout } from "react-icons/ai";
+import { FiSettings } from "react-icons/fi";
+import { FaMotorcycle } from "react-icons/fa";
+import { CiForkAndKnife } from "react-icons/ci";
+import { BiCategoryAlt } from "react-icons/bi";
 import { useState } from "react";
-import Account from "@/components/profile/Account";
-import Password from "@/components/profile/Password";
-import Order from "@/components/profile/Order";
+import Products from "@/components/admin/Products";
+import Orders from "@/components/admin/Orders";
 
 const Profile = () => {
   const [tab, setTab] = useState(0);
@@ -14,13 +15,13 @@ const Profile = () => {
   return (
     <div className="min-h-[calc(100vh_-_400px)]">
       <Head>
-        <title>Food Ordering | Profile</title>
+        <title>Food Ordering | Admin</title>
       </Head>
       <div className="md:flex mx-12">
         <div className="border min-w-[300px]">
           <div className="relative flex flex-col items-center gap-2 p-6">
             <Image
-              src="/images/client2.jpg"
+              src="/images/admin.png"
               alt=""
               width={100}
               height={100}
@@ -35,8 +36,8 @@ const Profile = () => {
                 tab === 0 && "bg-primary"
               }`}
             >
-              <AiOutlineHome size={20} />
-              Account
+              <CiForkAndKnife size={20} />
+              Products
             </button>
             <button
               onClick={() => setTab(1)}
@@ -44,30 +45,34 @@ const Profile = () => {
                 tab === 1 && "bg-primary"
               }`}
             >
-              <BsKey size={20} />
-              Password
+              <FaMotorcycle size={20} />
+              Orders
             </button>
             <button
               onClick={() => setTab(2)}
-              className={`flex items-center duration-500 justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4 ${
-                tab === 2 && "bg-primary"
-              }`}
+              className="flex items-center duration-500 justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4"
             >
-              <BsBasket size={20} />
-              Orders
+              <BiCategoryAlt size={20} />
+              Categories
+            </button>
+            <button
+              onClick={() => setTab(3)}
+              className="flex items-center duration-500 justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4"
+            >
+              <FiSettings size={20} />
+              Footer
             </button>
             <button className="flex items-center duration-500 group justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4">
               <AiOutlineLogout
                 size={20}
                 className="group-hover:rotate-180 duration-700"
               />
-              Logout
+              Exit
             </button>
           </div>
         </div>
-        {tab === 0 && <Account />}
-        {tab === 1 && <Password />}
-        {tab === 2 && <Order />}
+        {tab === 0 && <Products />}
+        {tab === 1 && <Orders />}
       </div>
     </div>
   );
