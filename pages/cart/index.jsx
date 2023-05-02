@@ -9,7 +9,7 @@ const Index = () => {
         <title>Food Ordering | Cart</title>
       </Head>
       <div className="flex justify-between items-center md:flex-row flex-col">
-        <div className="w-full min-h-[calc(100vh_-_433px)] flex items-center flex-1 md:p-10 p-4 overflow-auto">
+        <div className="w-full flex max-h-[400px] items-start flex-1 md:p-10 p-4 overflow-auto">
           <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
             <thead className="text-xs text-gray-400 bg-gray-700 uppercase">
               <tr>
@@ -46,7 +46,7 @@ const Index = () => {
             </tbody>
           </table>
         </div>
-        <div className="bg-secondary md:mb-0 -mb-20 text-white min-h-[calc(100vh_-_433px)] flex flex-col md:items-start items-center gap-3 p-20 md:w-auto w-full">
+        <div className="bg-secondary md:mb-0 -mb-20 text-white flex flex-col md:items-start items-center gap-3 p-20 md:w-auto w-full">
           <Title className="text-6xl mb-4">Cart Total</Title>
           <span>Subtotal : $20.00</span>
           <span>Discount : $0.00</span>
