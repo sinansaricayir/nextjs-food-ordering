@@ -8,6 +8,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { useState } from "react";
 import Products from "@/components/admin/Products";
 import Orders from "@/components/admin/Orders";
+import Category from "@/components/admin/Category";
 
 const Profile = () => {
   const [tab, setTab] = useState(0);
@@ -50,7 +51,9 @@ const Profile = () => {
             </button>
             <button
               onClick={() => setTab(2)}
-              className="flex items-center duration-500 justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4"
+              className={`flex items-center duration-500 justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4 ${
+                tab === 2 && "bg-primary"
+              }`}
             >
               <BiCategoryAlt size={20} />
               Categories
@@ -73,6 +76,7 @@ const Profile = () => {
         </div>
         {tab === 0 && <Products />}
         {tab === 1 && <Orders />}
+        {tab === 2 && <Category />}
       </div>
     </div>
   );

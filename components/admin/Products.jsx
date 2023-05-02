@@ -5,7 +5,7 @@ const Products = () => {
   return (
     <div className="flex-1 md:p-8 p-0 overflow-hidden">
       <Title className="text-4xl mb-8 md:mt-0 mt-8">Products</Title>
-      <div className="w-full max-h-[400px] overflow-auto">
+      <div className="w-full max-h-[400px] overflow-auto mb-8">
         <table className="w-full text-sm text-center text-gray-500 min-w-[1000px] ">
           <thead className="text-xs text-gray-400 bg-gray-700 uppercase">
             <tr>
@@ -41,7 +41,7 @@ const Products = () => {
                 $18
               </td>
               <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <button className="bg-red-600 rounded-md text-white py-1 px-2 hover:opacity-70">
+                <button className="bg-danger rounded-md text-white py-1 px-2 hover:opacity-70">
                   Delete
                 </button>
               </td>
@@ -60,7 +60,7 @@ const Products = () => {
                 $18
               </td>
               <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <button className="bg-red-600 rounded-md text-white py-1 px-2 hover:opacity-70">
+                <button className="bg-danger rounded-md text-white py-1 px-2 hover:opacity-70">
                   Delete
                 </button>
               </td>
@@ -79,7 +79,7 @@ const Products = () => {
                 $18
               </td>
               <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <button className="bg-red-600 rounded-md text-white py-1 px-2">
+                <button className="bg-danger rounded-md text-white py-1 px-2">
                   Delete
                 </button>
               </td>
