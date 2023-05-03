@@ -9,6 +9,7 @@ import { useState } from "react";
 import Products from "@/components/admin/Products";
 import Orders from "@/components/admin/Orders";
 import Category from "@/components/admin/Category";
+import Footer from "@/components/admin/Footer";
 
 const Profile = () => {
   const [tab, setTab] = useState(0);
@@ -16,7 +17,7 @@ const Profile = () => {
   return (
     <div className="min-h-[calc(100vh_-_400px)]">
       <Head>
-        <title>Food Ordering | Admin</title>
+        <title>Food Ordering | Profile</title>
       </Head>
       <div className="md:flex mx-12">
         <div className="border min-w-[300px]">
@@ -77,6 +78,7 @@ const Profile = () => {
         {tab === 0 && <Products />}
         {tab === 1 && <Orders />}
         {tab === 2 && <Category />}
+        {tab === 3 && <Footer />}
       </div>
     </div>
   );

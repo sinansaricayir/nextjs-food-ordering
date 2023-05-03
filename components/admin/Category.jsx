@@ -3,7 +3,10 @@ import Input from "../form/Input";
 import { useState } from "react";
 
 const Category = () => {
-  const [categories, setCategories] = useState(["Pizza"]);
+  const [categories, setCategories] = useState([
+    { id: 1, name: "Pizza" },
+    { id: 2, name: "Hamburger" },
+  ]);
   const [inputText, setInputText] = useState("");
 
   return (
@@ -19,19 +22,22 @@ const Category = () => {
           <button
             className="btn-primary"
             onClick={() => {
-              setCategories([...categories, inputText]);
+              setCategories([
+                { name: inputText, id: Math.random() },
+                ...categories,
+              ]);
               setInputText("");
             }}
           >
             Add
           </button>
         </div>
-        {categories.map((category, i) => (
+        {categories.map((category) => (
           <div
-            key={i}
+            key={category.id}
             className="flex items-center justify-between sm:mt-8 mt-4 text-xl"
           >
-            <b>{category}</b>
+            <b>{category.name}</b>
             <button
               onClick={() =>
                 setCategories(categories.filter((cat) => cat !== category))
