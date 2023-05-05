@@ -2,7 +2,7 @@ import Title from "@/components/ui/Title";
 import Image from "next/image";
 import { useState } from "react";
 
-const extraItems = [
+const itemsExtra = [
   {
     id: 1,
     name: "ketçap",
@@ -26,16 +26,33 @@ const extraItems = [
 ];
 
 const Index = () => {
-  const [price, setPrice] = useState(10);
-  const [extras, setExtras] = useState(extraItems);
+  const [prices, setPrices] = useState([10, 20, 30]);
+  const [price, setPrice] = useState(prices[0]);
+  const [size, setSize] = useState(0);
+  const [extraItems, setExtraItems] = useState(itemsExtra);
+  const [extras, setExtras] = useState([]);
 
-  const handleExtra = (checked, extraPrice) => {
-    if (checked == true) {
-      setPrice(price + extraPrice);
+  const changePrice = (number) => {
+    setPrice(price + number);
+  };
+
+  const handleSize = (sizeIndex) => {
+    const difference = prices[sizeIndex] - prices[size];
+    setSize(sizeIndex);
+    changePrice(difference);
+  };
+
+  const handleChange = (e, item) => {
+    const checked = e.target.checked;
+    if (checked) {
+      changePrice(item.price);
+      setExtras([...extras, item]);
     } else {
-      setPrice(price - extraPrice);
+      changePrice(-item.price);
+      setExtras(extras.filter((extra) => extra.id !== item.id));
     }
   };
+  console.log(extras);
 
   return (
     <>
@@ -57,19 +74,28 @@ const Index = () => {
           <div className="mb-6">
             <h4 className="font-bold mb-2">Choose The Size</h4>
             <div className="flex items-center gap-x-8">
-              <div className="relative h-8 w-8 hover:scale-110 transition-all cursor-pointer">
+              <div
+                className="relative h-8 w-8 hover:scale-110 transition-all cursor-pointer"
+                onClick={() => handleSize(0)}
+              >
                 <Image src="/images/size.png" alt="" fill />
                 <span className="absolute top-0 -right-6 text-xs bg-primary text-black font-bold px-1 rounded-xl">
                   Small
                 </span>
               </div>
-              <div className="relative h-12 w-12 hover:scale-110 transition-all cursor-pointer">
+              <div
+                className="relative h-12 w-12 hover:scale-110 transition-all cursor-pointer"
+                onClick={() => handleSize(1)}
+              >
                 <Image src="/images/size.png" alt="" fill />
                 <span className="absolute top-1 -right-7 text-xs bg-primary text-black font-bold px-1 rounded-xl">
                   Medium
                 </span>
               </div>
-              <div className="relative h-16 w-16 hover:scale-110 transition-all cursor-pointer">
+              <div
+                className="relative h-16 w-16 hover:scale-110 transition-all cursor-pointer"
+                onClick={() => handleSize(2)}
+              >
                 <Image src="/images/size.png" alt="" fill />
                 <span className="absolute top-1 -right-1 text-xs bg-primary text-black font-bold px-1 rounded-xl">
                   Large
@@ -80,16 +106,19 @@ const Index = () => {
           <div className="mb-8">
             <h4 className="font-bold mb-2">Choose Additional Ingredients</h4>
             <div className="flex items-center gap-4">
-              {extras.map((extra) => (
+              {extraItems.map((item) => (
                 <label
                   className="flex items-center gap-1 cursor-pointer"
-                  key={extra.id}
-                  onChange={(e) => handleExtra(e.target.checked, extra.price)}
+                  key={item.id}
                 >
-                  <input type="checkbox" className="accent-primary peer" />
+                  <input
+                    type="checkbox"
+                    className="accent-primary peer"
+                    onChange={(e) => handleChange(e, item)}
+                  />
                   <span className="peer-checked:font-semibold">
-                    {extra.name}{" "}
-                    <span className="text-xs font-bold text-primary">{`(+${extra.price}$)`}</span>
+                    {item.name}
+                    <span className="text-xs font-bold text-primary">{`(+${item.price}$)`}</span>
                   </span>
                 </label>
               ))}
