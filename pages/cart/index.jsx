@@ -1,8 +1,13 @@
 import Title from "@/components/ui/Title";
 import Head from "next/head";
 import Image from "next/image";
+import { useSelector, useDispatch } from "react-redux";
+import { reset } from "@/redux/cartSlice";
 
 const Index = () => {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
   return (
     <div className="min-h-[calc(100vh_-_433px)]">
       <Head>
@@ -28,30 +33,48 @@ const Index = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-secondary border-gray-700 hover:bg-primary duration-500">
-                <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  <Image src="/images/f1.png" alt="" width={50} height={50} />
-                  <span>Good Pizza</span>
-                </td>
-                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  <span>mayone,acı sos,ketçap</span>
-                </td>
-                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  $20
-                </td>
-                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  1
-                </td>
-              </tr>
+              {cart.products.map((product) => (
+                <tr
+                  className="bg-secondary border-gray-700 hover:bg-primary duration-500"
+                  key={product.id}
+                >
+                  <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    <Image src="/images/f1.png" alt="" width={50} height={50} />
+                    <span>{product.name}</span>
+                  </td>
+                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    <span>
+                      {product.extras.map((extra) => {
+                        return (
+                          <span className="mr-3" key={extra.id}>
+                            {extra.name} {product.extras.length > 1 ? "," : ""}
+                          </span>
+                        );
+                      })}
+                    </span>
+                  </td>
+                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    ${product.price}
+                  </td>
+                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    {product.quantity}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
         <div className="bg-secondary md:mb-0 -mb-20 text-white flex flex-col md:items-start items-center gap-3 p-20 md:w-auto w-full">
           <Title className="text-6xl mb-4">Cart Total</Title>
-          <span>Subtotal : $20.00</span>
+          <span>Subtotal : ${cart.total.toFixed(2)}</span>
           <span>Discount : $0.00</span>
-          <span>Total : $20.00</span>
-          <button className="btn-primary mt-4">Checkout Now</button>
+          <span>Total : ${cart.total.toFixed(2)}</span>
+          <button
+            className="btn-primary mt-4"
+            onClick={() => dispatch(reset())}
+          >
+            Checkout Now
+          </button>
         </div>
       </div>
     </div>

@@ -6,11 +6,13 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import Search from "../ui/Search";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);
   const [isMenuModal, setIsMenuModal] = useState(false);
   const router = useRouter();
+  const cart = useSelector((state) => state.cart);
 
   return (
     <div
@@ -51,8 +53,11 @@ const Header = () => {
           <Link href="/auth/login">
             <FaUserAlt className="hover:text-primary transition-all duration-300 cursor-pointer" />
           </Link>
-          <Link href="/cart">
+          <Link href="/cart" className="relative">
             <FaShoppingCart className="hover:text-primary transition-all duration-300 cursor-pointer" />
+            <span className="absolute -top-4 -right-3 text-xs rounded-full px-1 bg-primary text-black">
+              {cart.products.length ? cart.products.length : 0}
+            </span>
           </Link>
           <button onClick={() => setIsSearchModal(true)}>
             <FaSearch className="hover:text-primary transition-all duration-300 cursor-pointer" />

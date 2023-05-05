@@ -1,6 +1,8 @@
 import Title from "@/components/ui/Title";
 import Image from "next/image";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct } from "@/redux/cartSlice";
 
 const itemsExtra = [
   {
@@ -25,6 +27,15 @@ const itemsExtra = [
   },
 ];
 
+const foodItems = [
+  {
+    id: 1,
+    name: "Good Pizza",
+    image: "/images/size.png",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque ullam neque vero, pariatur velit tempore rem autem adipisci minima ea numquam nemo nihil nesciunt? Nesciunt.",
+  },
+];
+
 const Index = () => {
   const [prices, setPrices] = useState([10, 20, 30]);
   const [price, setPrice] = useState(prices[0]);
@@ -32,9 +43,20 @@ const Index = () => {
   const [extraItems, setExtraItems] = useState(itemsExtra);
   const [extras, setExtras] = useState([]);
 
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(addProduct({ ...foodItems[0], extras, price, quantity: 1 }));
+  };
+
   const changePrice = (number) => {
     setPrice(price + number);
   };
+
+  // const handleSize = (sizeIndex) => {
+  //   setPrice(prices[sizeIndex])
+  // };
 
   const handleSize = (sizeIndex) => {
     const difference = prices[sizeIndex] - prices[size];
@@ -52,7 +74,6 @@ const Index = () => {
       setExtras(extras.filter((extra) => extra.id !== item.id));
     }
   };
-  console.log(extras);
 
   return (
     <>
@@ -71,8 +92,8 @@ const Index = () => {
             ullam neque vero, pariatur velit tempore rem autem adipisci minima
             ea numquam nemo nihil nesciunt? Nesciunt.
           </p>
-          <div className="mb-6">
-            <h4 className="font-bold mb-2">Choose The Size</h4>
+          <div className="mb-10">
+            <h4 className="font-bold mb-4">Choose The Size</h4>
             <div className="flex items-center gap-x-8">
               <div
                 className="relative h-8 w-8 hover:scale-110 transition-all cursor-pointer"
@@ -103,9 +124,9 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="mb-8">
+          <div className="mb-8 flex flex-col">
             <h4 className="font-bold mb-2">Choose Additional Ingredients</h4>
-            <div className="flex items-center gap-4">
+            <div className="flex sm:flex-row flex-col gap-4 lg:items-start items-center mt-2">
               {extraItems.map((item) => (
                 <label
                   className="flex items-center gap-1 cursor-pointer"
@@ -124,7 +145,9 @@ const Index = () => {
               ))}
             </div>
           </div>
-          <button className="btn-primary mb-8">Add To Cart</button>
+          <button className="btn-primary mb-8" onClick={handleClick}>
+            Add To Cart
+          </button>
         </div>
       </div>
     </>
