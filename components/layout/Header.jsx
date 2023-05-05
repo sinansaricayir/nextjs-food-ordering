@@ -55,7 +55,11 @@ const Header = () => {
           </Link>
           <Link href="/cart" className="relative">
             <FaShoppingCart className="hover:text-primary transition-all duration-300 cursor-pointer" />
-            <span className="absolute -top-4 -right-3 text-xs rounded-full px-1 bg-primary text-black">
+            <span
+              className={`" -top-4 -right-3 text-xs rounded-full px-1 bg-primary text-black" ${
+                isMenuModal == false ? "absolute" : "hidden"
+              }`}
+            >
               {cart.products.length ? cart.products.length : 0}
             </span>
           </Link>
