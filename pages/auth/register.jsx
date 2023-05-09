@@ -5,7 +5,8 @@ import { registerSchema } from "@/schema/register";
 import Head from "next/head";
 import { FiLogIn } from "react-icons/fi";
 import Link from "next/link";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const onSubmit = async (values, action) => {
@@ -14,8 +15,11 @@ const Register = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
         values
       );
-      console.log(res);
+      if (res.status === 200) {
+        toast.success("User created successfully");
+      }
     } catch (error) {
+      toast.error(error.response.data.message);
       console.log(error);
     }
     // action.resetForm();
