@@ -5,17 +5,26 @@ import { registerSchema } from "@/schema/register";
 import Head from "next/head";
 import { FiLogIn } from "react-icons/fi";
 import Link from "next/link";
+import axios from "axios";
 
 const Register = () => {
   const onSubmit = async (values, action) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    action.resetForm();
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
+        values
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+    // action.resetForm();
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        fullName: "",
+        name: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -27,12 +36,12 @@ const Register = () => {
   const inputs = [
     {
       id: 1,
-      name: "fullName",
+      name: "name",
       type: "text",
       placeholder: "Your Full Name",
-      value: values.fullName,
-      errorMessage: errors.fullName,
-      touched: touched.fullName,
+      value: values.name,
+      errorMessage: errors.name,
+      touched: touched.name,
     },
     {
       id: 2,
@@ -83,7 +92,7 @@ const Register = () => {
           })}
         </div>
         <div className="flex flex-col sm:w-1/2 w-full gap-2 mt-4">
-          <button className="btn-primary relative">
+          <button className="btn-primary relative" type="submit">
             <FiLogIn size={25} className="absolute top-1 left-[35%]" />
             Register
           </button>

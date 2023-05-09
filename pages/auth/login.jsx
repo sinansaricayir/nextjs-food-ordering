@@ -10,7 +10,6 @@ import { useSession, signIn } from "next-auth/react";
 
 const Login = () => {
   const { data: session } = useSession();
-  console.log(session);
 
   const onSubmit = async (values, action) => {
     await new Promise((resolve) => setTimeout(resolve, 3000));
