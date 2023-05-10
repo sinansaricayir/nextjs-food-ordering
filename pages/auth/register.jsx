@@ -5,7 +5,7 @@ import { registerSchema } from "@/schema/register";
 import Head from "next/head";
 import { FiLogIn } from "react-icons/fi";
 import Link from "next/link";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -22,7 +22,7 @@ const Register = () => {
       toast.error(error.response.data.message);
       console.log(error);
     }
-    // action.resetForm();
+    action.resetForm();
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

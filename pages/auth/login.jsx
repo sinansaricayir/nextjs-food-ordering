@@ -7,14 +7,24 @@ import { AiFillGithub } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { data: session } = useSession();
 
   const onSubmit = async (values, action) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    action.resetForm();
+    const { email, password } = values;
+    let options = { redirect: false, email, password };
+    const res = await signIn("credentials", options);
+    if (res.status === 200) {
+      toast.success("Login successful");
+    } else {
+      toast.error(res.error);
+    }
+    // action.resetForm();
   };
+
+  console.log(session);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
