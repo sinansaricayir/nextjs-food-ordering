@@ -10,9 +10,27 @@ import Products from "@/components/admin/Products";
 import Orders from "@/components/admin/Orders";
 import Category from "@/components/admin/Category";
 import Footer from "@/components/admin/Footer";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [tab, setTab] = useState(0);
+  const { push } = useRouter();
+
+  const closeAdminAccount = async () => {
+    try {
+      if (confirm("Are you sure want to close your Admin account?")) {
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/admin`);
+        if (res.status === 200) {
+          push("/admin");
+          toast.success("Admin Account Closed!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh_-_400px)]">
@@ -66,7 +84,10 @@ const Profile = () => {
               <FiSettings size={20} />
               Footer
             </button>
-            <button className="flex items-center duration-500 group justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4">
+            <button
+              onClick={closeAdminAccount}
+              className="flex items-center duration-500 group justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4"
+            >
               <AiOutlineLogout
                 size={20}
                 className="group-hover:rotate-180 duration-700"
@@ -82,6 +103,22 @@ const Profile = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = (ctx) => {
+  const myCookie = ctx.req?.cookies || "";
+  if (myCookie.token !== process.env.ADMIN_TOKEN) {
+    return {
+      redirect: {
+        destination: "/admin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default Profile;
