@@ -2,14 +2,23 @@ import Head from "next/head";
 import Image from "next/image";
 import { AiOutlineHome, AiOutlineLogout } from "react-icons/ai";
 import { BsKey, BsBasket } from "react-icons/bs";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Account from "@/components/profile/Account";
 import Password from "@/components/profile/Password";
 import Order from "@/components/profile/Order";
+import { getSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Profile = () => {
   const [tab, setTab] = useState(0);
+  const { push } = useRouter();
+
+  const handleSignOut = () => {
+    if (confirm("Are you sure want to sign out?")) {
+      signOut({ redirect: false });
+      push("/auth/login");
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh_-_400px)]">
@@ -56,7 +65,10 @@ const Profile = () => {
               <BsBasket size={20} />
               Orders
             </button>
-            <button className="flex items-center duration-500 group justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4">
+            <button
+              onClick={handleSignOut}
+              className="flex items-center duration-500 group justify-start border-b border-t hover:bg-primary hover:text-white p-4 gap-x-4"
+            >
               <AiOutlineLogout
                 size={20}
                 className="group-hover:rotate-180 duration-700"
@@ -72,5 +84,22 @@ const Profile = () => {
     </div>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default Profile;

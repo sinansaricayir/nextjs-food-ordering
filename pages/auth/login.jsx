@@ -6,25 +6,29 @@ import Head from "next/head";
 import { AiFillGithub } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const Login = () => {
-  const { data: session } = useSession();
+  const { push } = useRouter();
 
   const onSubmit = async (values, action) => {
     const { email, password } = values;
     let options = { redirect: false, email, password };
-    const res = await signIn("credentials", options);
-    if (res.status === 200) {
-      toast.success("Login successful");
-    } else {
-      toast.error(res.error);
+    try {
+      const res = await signIn("credentials", options);
+      if (res.status === 200) {
+        toast.success("Login successful");
+        action.resetForm();
+        push("/profile");
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    // action.resetForm();
   };
-
-  console.log(session);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -102,5 +106,22 @@ const Login = () => {
     </div>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/profile",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default Login;
