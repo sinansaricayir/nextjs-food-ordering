@@ -16,8 +16,8 @@ const handler = async (req, res) => {
 
   if (method === "POST") {
     try {
-      const newCategory = await Category.create(req.body);
-      res.status(200).json(newCategory);
+      await Category.create(req.body);
+      res.status(200).json({ message: "Category Created Successfully" });
     } catch (error) {
       console.log(error);
     }
