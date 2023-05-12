@@ -13,6 +13,7 @@ const MenuItem = ({ image, title, text, price }) => {
             width={150}
             height={150}
             alt=""
+            priority
           />
         </div>
       </Link>

@@ -35,6 +35,7 @@ const Profile = ({ user }) => {
               width={100}
               height={100}
               className="rounded-full shadow-xl"
+              priority
             />
             <b className="mb-2">{user?.name}</b>
           </div>

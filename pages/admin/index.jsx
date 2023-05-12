@@ -19,7 +19,6 @@ const Admin = () => {
         values
       );
       if (res.status === 200) {
-        console.log("okkk");
         action.resetForm();
         toast.success("Login Success");
         push("/admin/profile");
