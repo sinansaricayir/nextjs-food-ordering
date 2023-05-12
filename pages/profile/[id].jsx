@@ -2,14 +2,15 @@ import Head from "next/head";
 import Image from "next/image";
 import { AiOutlineHome, AiOutlineLogout } from "react-icons/ai";
 import { BsKey, BsBasket } from "react-icons/bs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Account from "@/components/profile/Account";
 import Password from "@/components/profile/Password";
 import Order from "@/components/profile/Order";
 import { getSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
-const Profile = () => {
+const Profile = ({ user }) => {
   const [tab, setTab] = useState(0);
   const { push } = useRouter();
 
@@ -29,13 +30,13 @@ const Profile = () => {
         <div className="border min-w-[300px]">
           <div className="relative flex flex-col items-center gap-2 p-6">
             <Image
-              src="/images/client2.jpg"
+              src={user?.image ? user.image : "/images/admin.png"}
               alt=""
               width={100}
               height={100}
               className="rounded-full shadow-xl"
             />
-            <b className="mb-2">Jennifer Klane</b>
+            <b className="mb-2">{user?.name}</b>
           </div>
           <div className="flex flex-col">
             <button
@@ -77,16 +78,20 @@ const Profile = () => {
             </button>
           </div>
         </div>
-        {tab === 0 && <Account />}
-        {tab === 1 && <Password />}
+        {tab === 0 && <Account user={user} />}
+        {tab === 1 && <Password user={user} />}
         {tab === 2 && <Order />}
       </div>
     </div>
   );
 };
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req, params }) {
   const session = await getSession({ req });
+
+  const user = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${params.id}`
+  );
 
   if (!session) {
     return {
@@ -98,7 +103,7 @@ export async function getServerSideProps({ req }) {
   }
 
   return {
-    props: {},
+    props: { user: user ? user.data : null },
   };
 }
 

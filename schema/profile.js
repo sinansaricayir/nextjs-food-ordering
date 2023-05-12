@@ -1,10 +1,10 @@
 import * as Yup from "yup";
 
 export const profileSchema = Yup.object({
-  fullName: Yup.string()
+  name: Yup.string()
     .max(20, "Must be 20 characters or less")
     .min(3, "Must be 3 characters")
-    .required("Full name is required"),
+    .required("Name is required"),
   phoneNumber: Yup.string()
     .max(20, "Must be 20 characters or less")
     .required("Phone Number is required"),

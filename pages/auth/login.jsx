@@ -6,12 +6,16 @@ import Head from "next/head";
 import { AiFillGithub } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
 import Link from "next/link";
-import { signIn, getSession } from "next-auth/react";
+import { signIn, getSession, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Login = () => {
   const { push } = useRouter();
+  const { data: session } = useSession();
+  const [currentUser, setCurrentUser] = useState();
 
   const onSubmit = async (values, action) => {
     const { email, password } = values;
@@ -21,7 +25,6 @@ const Login = () => {
       if (res.status === 200) {
         toast.success("Login successful");
         action.resetForm();
-        push("/profile");
       } else {
         toast.error(res.error);
       }
@@ -29,6 +32,21 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+        setCurrentUser(
+          await res.data?.find((user) => user.email === session?.user?.email)
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+    session && push("/profile/" + currentUser?._id);
+  }, [session, currentUser, push]);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -110,10 +128,15 @@ const Login = () => {
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
 
-  if (session) {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+  const user = await res.data?.find(
+    (user) => user.email === session?.user.email
+  );
+
+  if (session && user) {
     return {
       redirect: {
-        destination: "/profile",
+        destination: `/profile/${user._id}`,
         permanent: false,
       },
     };

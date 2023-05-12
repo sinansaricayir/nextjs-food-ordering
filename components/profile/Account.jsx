@@ -2,22 +2,32 @@ import Input from "@/components/form/Input";
 import Title from "@/components/ui/Title";
 import { useFormik } from "formik";
 import { profileSchema } from "@/schema/profile";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const Account = () => {
+const Account = ({ user }) => {
   const onSubmit = async (values, action) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    action.resetForm();
+    try {
+      const res = axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/${user._id}`,
+        values
+      );
+      toast.success("Updated Successfully");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
+      enableReinitialize: true,
       initialValues: {
-        fullName: "",
-        phoneNumber: "",
-        email: "",
-        address: "",
-        job: "",
-        bio: "",
+        name: user?.name,
+        phoneNumber: user?.phoneNumber,
+        email: user?.email,
+        address: user?.address,
+        job: user?.job,
+        bio: user?.bio,
       },
       onSubmit,
       validationSchema: profileSchema,
@@ -26,12 +36,12 @@ const Account = () => {
   const inputs = [
     {
       id: 1,
-      name: "fullName",
+      name: "name",
       type: "text",
-      placeholder: "Your Full Name",
-      value: values.fullName,
-      errorMessage: errors.fullName,
-      touched: touched.fullName,
+      placeholder: "Your Name",
+      value: values.name,
+      errorMessage: errors.name,
+      touched: touched.name,
     },
     {
       id: 2,
@@ -93,7 +103,9 @@ const Account = () => {
           />
         ))}
       </div>
-      <button className="btn-primary mt-4 w-40 md:mb-0 mb-4">Update</button>
+      <button className="btn-primary mt-4 w-40 md:mb-0 mb-4" type="submit">
+        Update
+      </button>
     </form>
   );
 };
