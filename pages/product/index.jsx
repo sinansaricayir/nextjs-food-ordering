@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addProduct } from "@/redux/cartSlice";
+import Head from "next/head";
 
 const itemsExtra = [
   {
@@ -77,6 +78,9 @@ const Index = () => {
 
   return (
     <>
+      <Head>
+        <title>Food Ordering | Product</title>
+      </Head>
       <div className="h-screen flex items-center justify-center gap-20 md:flex-row flex-col">
         <div className="relative md:h-[45%] md:w-[35%] h-[50%] w-[50%] lg:mt-0 mt-4">
           {/* <img src="/images/f1.png" alt="" className="h-full w-full" /> */}
