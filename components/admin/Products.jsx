@@ -4,7 +4,7 @@ import Title from "@/components/ui/Title";
 const Products = () => {
   return (
     <div className="flex-1 md:p-8 p-0 overflow-hidden">
-      <Title className="text-4xl mb-8 md:mt-0 mt-8">Products</Title>
+      <Title className="text-4xl mb-10 md:mt-0 mt-8">Products</Title>
       <div className="w-full max-h-[400px] overflow-auto mb-8">
         <table className="w-full text-sm text-center text-gray-500 min-w-[1000px] ">
           <thead className="text-xs text-gray-400 bg-gray-700 uppercase">

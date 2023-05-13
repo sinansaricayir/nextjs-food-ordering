@@ -35,11 +35,11 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh_-_400px)]">
+    <div className="min-h-[calc(100vh_-_400px)] relative">
       <Head>
         <title>Food Ordering | Profile</title>
       </Head>
-      <div className="md:flex mx-12 relative">
+      <div className="md:flex mx-12">
         <div className="border min-w-[300px]">
           <div className="relative flex flex-col items-center gap-2 p-6">
             <Image
@@ -102,15 +102,15 @@ const Profile = () => {
         {tab === 1 && <Orders />}
         {tab === 2 && <Category />}
         {tab === 3 && <Footer />}
-        {tab === 0 && (
-          <button
-            onClick={() => setAddProductModal(true)}
-            className="absolute text-white py-2 px-4 top-4 right-0 bg-primary rounded-full hover:opacity-70"
-          >
-            Add Product
-          </button>
-        )}
       </div>
+      {tab === 0 && (
+        <button
+          onClick={() => setAddProductModal(true)}
+          className="text-white bg-primary rounded-full px-4 py-1 hover:opacity-70 md:right-20 right-12 absolute md:top-16 top-[60%]"
+        >
+          Add Product
+        </button>
+      )}
       {addProductModal && (
         <AddProduct
           addProductModal={addProductModal}
