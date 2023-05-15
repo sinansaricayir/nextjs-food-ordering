@@ -19,6 +19,4 @@ const Index = ({ categoryList, productList }) => {
   );
 };
 
-
-
 export default Index;

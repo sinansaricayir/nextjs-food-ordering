@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import MenuItem from "./MenuItem";
 
 const MenuWrapper = ({ categoryList, productList }) => {
   const [active, setActive] = useState(0);
+  const [filter, setfilter] = useState([]);
+
+  useEffect(() => {
+    setfilter(
+      productList.filter(
+        (product) =>
+          product.category === categoryList[active].title.toLocaleLowerCase()
+      )
+    );
+  }, [productList, categoryList, active]);
 
   return (
     <div className="container mx-auto mb-20">
@@ -22,9 +32,9 @@ const MenuWrapper = ({ categoryList, productList }) => {
             </button>
           ))}
       </div>
-      <div className="grid lg:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-8 mt-12">
+      <div className="grid lg:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-8 mt-12 min-h-[450px]">
         {productList.length > 0 &&
-          productList.map((product) => (
+          filter.map((product) => (
             <MenuItem key={product._id} product={product} />
           ))}
       </div>

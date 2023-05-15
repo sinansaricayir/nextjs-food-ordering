@@ -1,7 +1,41 @@
 import Image from "next/image";
 import Title from "@/components/ui/Title";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Products = () => {
+  const [products, setProducts] = useState([]);
+
+  const getProduct = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/products`
+      );
+      setProducts(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, [products]);
+
+  const handleDelete = async (id) => {
+    try {
+      if (confirm("Are you sure want to delete this product?")) {
+        const res = await axios.delete(
+          `${process.env.NEXT_PUBLIC_API_URL}/products/${id}`
+        );
+        if (res.status === 200) {
+          toast.success(res.data.message);
+          getProduct();
+        }
+      }
+    } catch (error) {}
+  };
+
   return (
     <div className="flex-1 md:p-8 p-0 overflow-hidden">
       <Title className="text-4xl mb-10 md:mt-0 mt-8">Products</Title>
@@ -27,63 +61,34 @@ const Products = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-secondary border-gray-700 hover:bg-primary duration-500">
-              <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <Image src="/images/f1.png" alt="" width={50} height={50} />
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                7648UIE56
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                Good Pizza
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                $18
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <button className="bg-danger rounded-md text-white py-1 px-2 hover:opacity-70">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-secondary border-gray-700 hover:bg-primary duration-500">
-              <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <Image src="/images/f2.png" alt="" width={50} height={50} />
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                7648UIE56
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                Double Burger
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                $18
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <button className="bg-danger rounded-md text-white py-1 px-2 hover:opacity-70">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            <tr className="bg-secondary border-gray-700 hover:bg-primary duration-500">
-              <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <Image src="/images/f3.png" alt="" width={50} height={50} />
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                7648UIE56
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                Delicious Pizza
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                $18
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <button className="bg-danger rounded-md text-white py-1 px-2">
-                  Delete
-                </button>
-              </td>
-            </tr>
+            {products.length > 0 &&
+              products.map((product) => (
+                <tr
+                  className="bg-secondary border-gray-700 hover:bg-primary duration-500"
+                  key={product._id}
+                >
+                  <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    <Image src={product.img} alt="" width={50} height={50} />
+                  </td>
+                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    {product._id.substr(4, 8)}
+                  </td>
+                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    {product.title}
+                  </td>
+                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    ${product.prices[0]}
+                  </td>
+                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                    <button
+                      onClick={() => handleDelete(product._id)}
+                      className="bg-danger rounded-md text-white py-1 px-2 opacity-70 hover:opacity-100"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
