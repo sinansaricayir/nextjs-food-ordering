@@ -47,7 +47,7 @@ const Index = () => {
                       {product.extras.map((extra) => {
                         return (
                           <span className="mr-3" key={extra.id}>
-                            {extra.name} {product.extras.length > 1 ? "," : ""}
+                            {extra.text} {product.extras.length > 1 ? "," : ""}
                           </span>
                         );
                       })}

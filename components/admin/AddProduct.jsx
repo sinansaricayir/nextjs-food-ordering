@@ -168,7 +168,7 @@ const AddProduct = ({ addProductModal, setAddProductModal }) => {
           </div>
           <div className="flex flex-col items-start my-4">
             <label className="font-bold text-md mb-1">Prices</label>
-            {category === "pizza" || category === "hamburger" ? (
+            {category === "pizza" ? (
               <div className="flex gap-4">
                 <div className="">
                   <input
