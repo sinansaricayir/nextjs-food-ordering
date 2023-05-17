@@ -19,6 +19,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
     );
   }, [productList, categoryList, active]);
 
+
   return (
     <div className="container mx-auto mb-20">
       <Title className="text-4xl text-center mt-20">Our Menu</Title>
@@ -26,7 +27,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
         {categoryList &&
           diff.map((category, index) => (
             <button
-              key={category._id}
+              key={index}
               className={`px-6 py-1 cursor-pointer uppercase rounded-2xl duration-300 ease-out ${
                 index === active ? "bg-secondary text-white scale-105" : " "
               }`}

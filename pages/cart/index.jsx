@@ -3,10 +3,47 @@ import Head from "next/head";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { reset } from "@/redux/cartSlice";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
-const Index = () => {
+const Index = ({ userList }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const { data: session } = useSession();
+  const user = userList?.find((user) => user.email === session?.user?.email);
+  const router = useRouter();
+
+  const newOrder = {
+    customer: user?.name,
+    address: user?.address ? user?.address : "No Adress",
+    total: cart?.total,
+    status: 0,
+    method: 0,
+  };
+
+  const createOrder = async () => {
+    try {
+      if (user) {
+        if (confirm("Are you sure for ordering?")) {
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+            newOrder
+          );
+          if (res.status === 200) {
+            router.push(`/order/${res.data._id}`);
+            dispatch(reset());
+            toast.success("Ordering Succesfully", { autoClose: 1000 });
+          }
+        }
+      } else {
+        toast.error("You should login first!", { autoClose: 1000 });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh_-_433px)]">
@@ -36,7 +73,7 @@ const Index = () => {
               {cart.products.map((product) => (
                 <tr
                   className="bg-secondary border-gray-700 hover:bg-primary duration-500"
-                  key={product.id}
+                  key={Math.random()}
                 >
                   <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                     <Image src="/images/f1.png" alt="" width={50} height={50} />
@@ -46,7 +83,7 @@ const Index = () => {
                     <span>
                       {product.extras.map((extra) => {
                         return (
-                          <span className="mr-3" key={extra.id}>
+                          <span className="mr-3" key={extra._id}>
                             {extra.text} {product.extras.length > 1 ? "," : ""}
                           </span>
                         );
@@ -69,16 +106,23 @@ const Index = () => {
           <span>Subtotal : ${cart.total.toFixed(2)}</span>
           <span>Discount : $0.00</span>
           <span>Total : ${cart.total.toFixed(2)}</span>
-          <button
-            className="btn-primary mt-4"
-            onClick={() => dispatch(reset())}
-          >
+          <button className="btn-primary mt-4" onClick={createOrder}>
             Checkout Now
           </button>
         </div>
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = async () => {
+  const users = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+
+  return {
+    props: {
+      userList: users.data ? users.data : [],
+    },
+  };
 };
 
 export default Index;

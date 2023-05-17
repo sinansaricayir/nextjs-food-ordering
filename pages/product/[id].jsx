@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addProduct } from "@/redux/cartSlice";
 import Head from "next/head";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Index = ({ food }) => {
   const [prices, setPrices] = useState(food.prices);
@@ -12,13 +13,13 @@ const Index = ({ food }) => {
   const [size, setSize] = useState(0);
   const [extraItems, setExtraItems] = useState(food.extraOptions);
   const [extras, setExtras] = useState([]);
-  console.log(food.extraOptions);
 
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(addProduct({ ...food, extras, price, quantity: 1 }));
+    toast.success("İt added to cart successfully", { autoClose: 1000 });
   };
 
   const changePrice = (number) => {
@@ -54,7 +55,7 @@ const Index = ({ food }) => {
       <div className="h-screen flex items-center justify-center gap-20 md:flex-row flex-col">
         <div className="relative md:h-[45%] md:w-[35%] h-[50%] w-[50%] lg:mt-0 mt-4">
           {/* <img src="/images/f1.png" alt="" className="h-full w-full" /> */}
-          <Image src={food.img} alt={food.title} fill />
+          <Image src={food.img} alt={food.title} fill priority />
         </div>
         <div className="flex flex-col lg:items-start items-center">
           <Title className="text-6xl mb-8">{food.title}</Title>
@@ -102,7 +103,7 @@ const Index = ({ food }) => {
               {extraItems.map((item) => (
                 <label
                   className="flex items-center gap-1 cursor-pointer"
-                  key={item.id}
+                  key={item._id}
                 >
                   <input
                     type="checkbox"

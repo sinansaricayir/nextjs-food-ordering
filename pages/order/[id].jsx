@@ -1,7 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
+import axios from "axios";
 
-const Order = () => {
+const Order = ({ order }) => {
+  console.log(order);
+
   return (
     <div className="min-h-[calc(100vh_-_433px)] flex flex-col justify-center">
       <Head>
@@ -29,16 +32,16 @@ const Order = () => {
             <tbody>
               <tr className="bg-secondary border-gray-700 hover:bg-primary duration-500">
                 <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  4885AFQ23D
+                  {order?._id.substring(5, 12)}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  Sinan Sarıçayr
+                  {order?.customer}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  Ankara
+                  {order?.address}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  $22
+                  ${order?.total}
                 </td>
               </tr>
             </tbody>
@@ -70,6 +73,18 @@ const Order = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = async ({ params }) => {
+  const order = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/orders/${params.id}`
+  );
+
+  return {
+    props: {
+      order: order.data ? order.data : [],
+    },
+  };
 };
 
 export default Order;
