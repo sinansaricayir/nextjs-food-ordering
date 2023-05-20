@@ -76,18 +76,21 @@ const Index = ({ userList }) => {
                   key={Math.random()}
                 >
                   <td className="flex justify-center items-center gap-1 py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                    <Image src="/images/f1.png" alt="" width={50} height={50} />
+                    <Image src={product.img} alt="" width={50} height={50} />
                     <span>{product.name}</span>
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                     <span>
-                      {product.extras.map((extra) => {
-                        return (
-                          <span className="mr-3" key={extra._id}>
-                            {extra.text} {product.extras.length > 1 ? "," : ""}
-                          </span>
-                        );
-                      })}
+                      {product.extras.length > 0
+                        ? product.extras.map((extra) => {
+                            return (
+                              <span className="mr-3" key={extra._id}>
+                                {extra.text}
+                                {product.extras.length > 1 ? "," : ""}
+                              </span>
+                            );
+                          })
+                        : "empty extra"}
                     </span>
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
