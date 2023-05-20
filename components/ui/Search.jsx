@@ -8,7 +8,7 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 
 const Search = ({ isSearchModal, setIsSearchModal }) => {
   const [products, setProducts] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState(1);
   const [search, setSearch] = useState("");
 
   const router = useRouter();
