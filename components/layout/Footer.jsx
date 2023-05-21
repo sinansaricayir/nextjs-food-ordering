@@ -81,7 +81,7 @@ const Footer = () => {
             <span>{footer?.openingHours?.hour}</span>
           </div>
         </div>
-        <div className="text-center mt-12">
+        <div className="text-center mt-4">
           © 2023 All Rights Reserved By SSA
         </div>
       </div>

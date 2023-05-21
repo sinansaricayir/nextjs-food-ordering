@@ -88,7 +88,7 @@ const AddProduct = ({ addProductModal, setAddProductModal }) => {
 
       if (res.status === 200) {
         setAddProductModal(false);
-        toast.success("Product Added Successfully");
+        toast.success("Product Added Successfully", { autoClose: 1000 });
       }
     } catch (error) {
       console.log(error);

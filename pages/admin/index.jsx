@@ -20,7 +20,7 @@ const Admin = () => {
       );
       if (res.status === 200) {
         action.resetForm();
-        toast.success("Login Success");
+        toast.success("Login Success", { autoClose: 1000 });
         push("/admin/profile");
       }
     } catch (error) {

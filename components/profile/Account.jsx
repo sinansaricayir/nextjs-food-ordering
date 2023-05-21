@@ -12,7 +12,7 @@ const Account = ({ user }) => {
         `${process.env.NEXT_PUBLIC_API_URL}/users/${user._id}`,
         values
       );
-      toast.success("Updated Successfully");
+      toast.success("Updated Successfully", { autoClose: 1000 });
     } catch (error) {
       console.log(error);
     }

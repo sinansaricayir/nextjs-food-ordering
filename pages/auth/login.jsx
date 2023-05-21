@@ -23,7 +23,7 @@ const Login = () => {
     try {
       const res = await signIn("credentials", options);
       if (res.status === 200) {
-        toast.success("Login successful");
+        toast.success("Login successful", { autoClose: 1000 });
         action.resetForm();
       } else {
         toast.error(res.error);

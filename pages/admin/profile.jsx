@@ -26,7 +26,7 @@ const Profile = () => {
         const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/admin`);
         if (res.status === 200) {
           push("/admin");
-          toast.success("Admin Account Closed!");
+          toast.success("Admin Account Closed!", { autoClose: 1000 });
         }
       }
     } catch (error) {

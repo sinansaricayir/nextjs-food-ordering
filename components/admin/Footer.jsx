@@ -2,33 +2,65 @@ import Input from "@/components/form/Input";
 import Title from "@/components/ui/Title";
 import { useFormik } from "formik";
 import { footerSchema } from "@/schema/footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Footer = () => {
-  const [icons, setIcons] = useState([
-    "fab fa-facebook",
-    "fab fa-twitter",
-    "fab fa-instagram",
-  ]);
-  const [link, setLink] = useState("");
-  const [iconName, setIconName] = useState("");
+  const [iconName, setIconName] = useState("fab fa-");
+  const [linkAddress, setLinkAddress] = useState("htpps://");
+  const [footerData, setFooterData] = useState("");
+  const [socialMediaLinks, setSocialMediaLinks] = useState([]);
+
+  useEffect(() => {
+    const getFooterdata = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/footer`
+        );
+        setFooterData(res.data[0]);
+        setSocialMediaLinks(res.data[0].socialMedia);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getFooterdata();
+  }, []);
 
   const onSubmit = async (values, action) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    action.resetForm();
+    try {
+      const res = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/footer/${footerData._id}`,
+        {
+          location: values.location,
+          email: values.email,
+          phoneNumber: values.phoneNumber,
+          desc: values.desc,
+          openingHours: {
+            day: values.day,
+            hour: values.time,
+          },
+          socialMedia: socialMediaLinks,
+        }
+      );
+      if (res.status === 200) {
+        toast.success("Updated Successfully", { autoClose: 1000 });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  console.log(iconName, link);
-
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
+      enableReinitialize: true,
       initialValues: {
-        location: "",
-        email: "",
-        phoneNumber: "",
-        desc: "",
-        day: "",
-        time: "",
+        location: footerData?.location,
+        email: footerData?.email,
+        phoneNumber: footerData?.phoneNumber,
+        desc: footerData?.desc,
+        day: footerData?.openingHours?.day,
+        time: footerData?.openingHours?.hour,
       },
       onSubmit,
       validationSchema: footerSchema,
@@ -56,7 +88,7 @@ const Footer = () => {
     {
       id: 3,
       name: "phoneNumber",
-      type: "number",
+      type: "text",
       placeholder: "Phone Number",
       value: values.phoneNumber,
       errorMessage: errors.phoneNumber,
@@ -91,6 +123,19 @@ const Footer = () => {
     },
   ];
 
+  const handleCreate = (e) => {
+    setSocialMediaLinks([
+      ...socialMediaLinks,
+      {
+        icon: iconName,
+        link: linkAddress,
+      },
+    ]);
+
+    setLinkAddress("https://");
+    setIconName("fab fa-");
+  };
+
   return (
     <form className="flex-1 md:p-8 p-0" onSubmit={handleSubmit}>
       <Title className="text-4xl mb-4 md:mt-0 mt-8">Footer Settings</Title>
@@ -111,13 +156,13 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8 mb-4">
             <Input
               type="text"
-              defaultValue="https://"
+              value={linkAddress}
               placeholder="Link Address"
-              onChange={(e) => setLink(e.target.value)}
+              onChange={(e) => setLinkAddress(e.target.value)}
             />
             <Input
               type="text"
-              defaultValue="fab fa-"
+              value={iconName}
               placeholder="Icon Name"
               onChange={(e) => setIconName(e.target.value)}
             />
@@ -126,17 +171,19 @@ const Footer = () => {
             <button
               className="btn-primary"
               type="button"
-              onClick={() => setIcons([...icons, iconName])}
+              onClick={handleCreate}
             >
               Add
             </button>
             <ul className="flex gap-4 sm:mt-o mt-4">
-              {icons.map((icon, index) => (
+              {socialMediaLinks?.map((item, index) => (
                 <li key={index} className="flex items-center gap-2">
-                  <i className={`${icon} text-2xl`}></i>
+                  <i className={`${item.icon} text-2xl`}></i>
                   <button
                     onClick={() =>
-                      setIcons(icons.filter((prev, i) => i !== index))
+                      setSocialMediaLinks((prev) =>
+                        prev.filter((item, i) => i !== index)
+                      )
                     }
                     type="button"
                   >
@@ -148,7 +195,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <button className="btn-primary mt-4 w-40 md:mb-0 mb-4">Update</button>
+      <button className="btn-primary mt-4 w-40 md:mb-0 mb-4" type="submit">
+        Update
+      </button>
     </form>
   );
 };

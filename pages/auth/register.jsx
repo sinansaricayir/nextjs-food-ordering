@@ -18,7 +18,7 @@ const Register = () => {
         values
       );
       if (res.status === 200) {
-        toast.success("User created successfully");
+        toast.success("User created successfully", { autoClose: 1000 });
         push("/auth/login");
       }
     } catch (error) {
