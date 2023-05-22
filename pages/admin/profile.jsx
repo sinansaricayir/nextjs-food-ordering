@@ -106,7 +106,7 @@ const Profile = () => {
       {tab === 0 && (
         <button
           onClick={() => setAddProductModal(true)}
-          className="text-white bg-primary rounded-full px-4 py-1 hover:opacity-70 md:right-20 right-12 absolute md:top-16 top-[60%]"
+          className="text-white bg-primary rounded-full px-4 py-1 hover:opacity-70 md:right-20 right-12 absolute md:top-16 top-[50%]"
         >
           Add Product
         </button>
