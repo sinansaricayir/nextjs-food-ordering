@@ -12,7 +12,7 @@ const Order = ({ order }) => {
       </Head>
       <div className="md:p-10 p-4 ">
         <div className="w-full flex flex-1 flex-col md:overflow-hidden overflow-auto">
-          <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
+          <table className="w-full text-sm text-center text-gray-500 xl:min-w-[1000px]">
             <thead className="text-xs text-gray-400 bg-gray-700 uppercase">
               <tr>
                 <th scope="col" className="py-3 px-6">
@@ -46,7 +46,7 @@ const Order = ({ order }) => {
               </tr>
             </tbody>
           </table>
-          <div className="flex justify-between px-8 py-4 bg-primary w-full mt-4 min-w-[1000px]">
+          <div className="flex justify-between px-8 py-4 bg-primary w-full mt-4 xl:min-w-[1000px]">
             <div className="relative flex flex-col items-center">
               <Image src="/images/paid.png" width={40} height={40} alt="" />
               <span>Payment</span>

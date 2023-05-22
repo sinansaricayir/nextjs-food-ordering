@@ -58,7 +58,7 @@ const Search = ({ isSearchModal, setIsSearchModal }) => {
         <div>
           <ul className="mt-4">
             {products
-              .slice(0, 5)
+              .slice(0, 3)
               .filter((prod) => prod.title.toLocaleLowerCase().includes(search))
               .map((product) => (
                 <li

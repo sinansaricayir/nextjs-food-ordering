@@ -56,11 +56,11 @@ const Footer = () => {
             <Title className="text-4xl text-center"> Feane</Title>
             <p className="max-w-lg text-center">{footer?.desc}</p>
             <div>
-              <ul className="flex items-center gap-2">
+              <ul className="flex items-center justify-center gap-2">
                 {footer?.socialMedia?.map((item) => (
                   <li
                     key={item._id}
-                    className="p-1 rounded-full bg-white text-black hover:text-primary hover:scale-110 ease-in duration-300"
+                    className=" bg-white text-black hover:text-primary hover:scale-110 ease-in duration-300 rounded-full px-1"
                   >
                     <a
                       href={item?.link}

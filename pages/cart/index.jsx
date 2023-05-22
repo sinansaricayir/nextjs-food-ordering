@@ -52,7 +52,7 @@ const Index = ({ userList }) => {
       </Head>
       <div className="flex justify-between items-start md:flex-row flex-col">
         <div className="w-full flex max-h-[400px] items-start flex-1 md:p-10 p-4 overflow-auto">
-          <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
+          <table className="w-full text-sm text-center text-gray-500 xl:min-w-[1000px]">
             <thead className="text-xs text-gray-400 bg-gray-700 uppercase">
               <tr>
                 <th scope="col" className="py-3 px-6">

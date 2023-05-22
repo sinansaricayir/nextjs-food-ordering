@@ -39,7 +39,7 @@ const Orders = () => {
     <div className="flex-1 md:p-8 p-0 overflow-hidden">
       <Title className="text-4xl mb-8 md:mt-0 mt-8">Orders</Title>
       <div className="w-full max-h-[400px] overflow-auto mb-8">
-        <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
+        <table className="w-full text-sm text-center text-gray-500 xl:min-w-[1000px]">
           <thead className="text-xs text-gray-400 bg-gray-700 uppercase">
             <tr>
               <th scope="col" className="py-3 px-6">
