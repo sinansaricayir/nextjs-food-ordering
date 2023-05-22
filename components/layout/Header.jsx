@@ -34,6 +34,7 @@ const Header = () => {
               className={`hover:text-primary cursor-pointer ${
                 router.asPath === "/" && "text-primary animate-bounce"
               }`}
+              onClick={() => setIsMenuModal(false)}
             >
               <Link href="/">home</Link>
             </li>
@@ -41,6 +42,7 @@ const Header = () => {
               className={`hover:text-primary cursor-pointer ${
                 router.asPath === "/menu" && "text-primary animate-bounce"
               }`}
+              onClick={() => setIsMenuModal(false)}
             >
               <Link href="/menu">menu</Link>
             </li>
@@ -48,6 +50,7 @@ const Header = () => {
               className={`hover:text-primary cursor-pointer ${
                 router.asPath === "/about" && "text-primary animate-bounce"
               }`}
+              onClick={() => setIsMenuModal(false)}
             >
               <Link href="/about">about</Link>
             </li>
@@ -56,6 +59,7 @@ const Header = () => {
                 router.asPath === "/reservation" &&
                 "text-primary animate-bounce"
               }`}
+              onClick={() => setIsMenuModal(false)}
             >
               <Link href="/reservation">book table</Link>
             </li>
