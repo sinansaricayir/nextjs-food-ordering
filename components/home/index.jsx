@@ -1,8 +1,8 @@
 import React from "react";
-import MenuWrapper from "../../components/products/MenuWrapper";
-import Campaigns from "../../components/Campaigns";
-import Carousel from "../../components/Carousel";
-import About from "../../components/About";
+import MenuWrapper from "../products/MenuWrapper";
+import Campaigns from "../Campaigns";
+import Carousel from "../Carousel";
+import About from "../About";
 import Reservation from "@/components/Reservation";
 import Customers from "@/components/customers/Customers";
 
