@@ -63,7 +63,7 @@ const Order = () => {
                     <span>{order.address}</span>
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                    {order.createdAt}
+                    {order.createdAt.substring(0, 10)}
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                     ${order.total}

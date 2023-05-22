@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <div
-      className={`h-[5.5rem] z-40 relative ${
+      className={`h-[5.5rem] z-40 fixed top-0 w-full ${
         router.asPath === "/" ? "bg-transparent" : "bg-secondary"
       }`}
     >
@@ -30,16 +30,33 @@ const Header = () => {
            }`}
         >
           <ul className="flex sm:flex-row flex-col gap-6 uppercase text-center">
-            <li className="hover:text-primary cursor-pointer">
+            <li
+              className={`hover:text-primary cursor-pointer ${
+                router.asPath === "/" && "text-primary animate-bounce"
+              }`}
+            >
               <Link href="/">home</Link>
             </li>
-            <li className="hover:text-primary cursor-pointer">
+            <li
+              className={`hover:text-primary cursor-pointer ${
+                router.asPath === "/menu" && "text-primary animate-bounce"
+              }`}
+            >
               <Link href="/menu">menu</Link>
             </li>
-            <li className="hover:text-primary cursor-pointer">
+            <li
+              className={`hover:text-primary cursor-pointer ${
+                router.asPath === "/about" && "text-primary animate-bounce"
+              }`}
+            >
               <Link href="/about">about</Link>
             </li>
-            <li className="hover:text-primary cursor-pointer">
+            <li
+              className={`hover:text-primary cursor-pointer ${
+                router.asPath === "/reservation" &&
+                "text-primary animate-bounce"
+              }`}
+            >
               <Link href="/reservation">book table</Link>
             </li>
           </ul>
@@ -51,14 +68,24 @@ const Header = () => {
         </nav>
         <div className="flex gap-x-4 items-center">
           <Link href="/auth/login">
-            <FaUserAlt className="hover:text-primary transition-all duration-300 cursor-pointer" />
+            <FaUserAlt
+              className={`hover:text-primary transition-all duration-300 cursor-pointer ${
+                (router.asPath.includes("profile") ||
+                  router.asPath.includes("auth")) &&
+                "text-primary animate-bounce"
+              }`}
+            />
           </Link>
           <Link href="/cart" className="relative">
-            <FaShoppingCart className="hover:text-primary transition-all duration-300 cursor-pointer" />
+            <FaShoppingCart
+              className={`hover:text-primary transition-all duration-300 cursor-pointer ${
+                router.asPath === "/cart" && "text-primary"
+              }`}
+            />
             <span
               className={`" -top-4 -right-3 text-xs rounded-full px-1 bg-primary text-black" ${
                 isMenuModal == false ? "absolute" : "hidden"
-              }`}
+              } ${router.asPath === "/cart" && "animate-bounce"}`}
             >
               {cart.products.length ? cart.products.length : 0}
             </span>

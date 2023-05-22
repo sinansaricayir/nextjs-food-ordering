@@ -17,6 +17,8 @@ const Index = ({ food }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  const findCart = cart.products.find((item) => item._id === food._id);
+
   const handleClick = () => {
     dispatch(addProduct({ ...food, extras, price, quantity: 1 }));
     toast.success("İt added to cart successfully", { autoClose: 1000 });
@@ -118,7 +120,13 @@ const Index = ({ food }) => {
               ))}
             </div>
           </div>
-          <button className="btn-primary mb-8" onClick={handleClick}>
+          <button
+            disabled={findCart}
+            className={`btn-primary mb-8 ${
+              findCart && "cursor-not-allowed opacity-50"
+            }`}
+            onClick={handleClick}
+          >
             Add To Cart
           </button>
         </div>

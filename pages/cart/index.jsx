@@ -50,7 +50,7 @@ const Index = ({ userList }) => {
       <Head>
         <title>Food Ordering | Cart</title>
       </Head>
-      <div className="flex justify-between items-center md:flex-row flex-col">
+      <div className="flex justify-between items-start md:flex-row flex-col">
         <div className="w-full flex max-h-[400px] items-start flex-1 md:p-10 p-4 overflow-auto">
           <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
             <thead className="text-xs text-gray-400 bg-gray-700 uppercase">
@@ -84,7 +84,7 @@ const Index = ({ userList }) => {
                       {product.extras.length > 0
                         ? product.extras.map((extra) => {
                             return (
-                              <span className="mr-3" key={extra._id}>
+                              <span className="mr-3" key={Math.random()}>
                                 {extra.text}
                                 {product.extras.length > 1 ? "," : ""}
                               </span>
@@ -109,9 +109,21 @@ const Index = ({ userList }) => {
           <span>Subtotal : ${cart.total.toFixed(2)}</span>
           <span>Discount : $0.00</span>
           <span>Total : ${cart.total.toFixed(2)}</span>
-          <button className="btn-primary mt-4" onClick={createOrder}>
-            Checkout Now
-          </button>
+          <div className="flex flex-col mt-10">
+            <button className="btn-primary mt-4" onClick={createOrder}>
+              Checkout Now
+            </button>
+            <button
+              className="btn-primary mt-6 !bg-red-600"
+              onClick={() => {
+                if (confirm("are you sure to delete order/orders ?")) {
+                  dispatch(reset());
+                }
+              }}
+            >
+              Cancel Order
+            </button>
+          </div>
         </div>
       </div>
     </div>
